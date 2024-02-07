@@ -1,0 +1,3 @@
+sim/
+*.env
+.ipynb_checkpoints
