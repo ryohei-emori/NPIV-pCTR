@@ -12,11 +12,17 @@ def generate_data_with_Z(Aucs_train, Ads_train, num_X, random_impressions):
     coefficients_X_outcome = np.random.normal(0.1, 1, num_X)
     intercept_outcome = np.random.normal()
 
+    coeffs_dict = {"intercept_outcome":intercept_outcome,
+                   "coefficients_X_outcome":coefficients_X_outcome,
+                   "intercept_treatment":intercept_treatment,
+                   "coefficients_X_treatment":coefficients_X_treatment,
+                   "coefficient_Z":coefficient_Z,
+                   "coefficients_interaction_Z_X":coefficients_interaction_Z_X}
+
     def create_dataset(random_impressions=None):
         X = []
         Z = []
         eta_values = []
-        #upsi_values = []
         auction_ids = []
 
         if random_impressions is not None:
@@ -55,7 +61,7 @@ def generate_data_with_Z(Aucs_train, Ads_train, num_X, random_impressions):
         else:
             interaction_Z_X = Z.reshape(-1, 1) * X
             eta_sqrt = np.sqrt(np.abs(eta))
-            linear_prob_for_intervention = intercept_treatment + np.sum(X * coefficients_X_treatment, axis=1) + coefficient_Z * Z + np.sum(interaction_Z_X * coefficients_interaction_Z_X, axis=1) + eta + np.random.normal(0, 0.1, N_train)
+            linear_prob_for_intervention = intercept_treatment + np.sum(X * coefficients_X_treatment, axis=1) + coefficient_Z * Z + np.sum(interaction_Z_X * coefficients_interaction_Z_X, axis=1) + eta
             sigmoid_prob_for_intervention = 1 / (1 + np.exp(-linear_prob_for_intervention))
             true_propensity = np.random.binomial(1, sigmoid_prob_for_intervention)
             intervention = np.zeros(N_train)
@@ -78,5 +84,5 @@ def generate_data_with_Z(Aucs_train, Ads_train, num_X, random_impressions):
 
     df_train = create_dataset()
     df_val = create_dataset(random_impressions=random_impressions)
-
-    return df_train, df_val
+                   
+    return df_train, df_val, coeffs_dict
