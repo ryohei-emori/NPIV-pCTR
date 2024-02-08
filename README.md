@@ -1,5 +1,7 @@
 # KDD2024 Applied Data Science track
 
+##### Title: Robust Ad Click Prediction by Leveraging Instrumental Variables in Online Advertising Auctions
+
 ## Illustration
 
 For reproducibility of the paper, the simulations used in the paper and the network structure of the model will be made available.
