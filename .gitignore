@@ -1,3 +1,5 @@
 sim/
 *.env
 .ipynb_checkpoints
+.gitignore
+.DS_Store
