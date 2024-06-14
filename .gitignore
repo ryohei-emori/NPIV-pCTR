@@ -1,0 +1,8 @@
+venv/
+bs_checkpoints/
+checkpoints/
+sim_WGSP_payment.ipynb
+<<<<<<< HEAD
+=======
+venv/
+>>>>>>> 66418f3 (Resolved merge conflicts)
